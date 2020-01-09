@@ -33,14 +33,14 @@ class APIPermCheckMiddleware(MiddlewareMixin):
 
         logger.debug(f"header_token is:{header_token} user: {user}, method: {method}, path: {path}")
         if not path.startswith('/admin/'):
-            if not self._check_permission(path, user, method):
+            if not self._has_permission(path, user, method):
                 res = JsonResponse({
                     'code': 1,
                     'msg': f'permission denied: user: {user}, method: {method}, path: {path}',
                 }, status=status.HTTP_403_FORBIDDEN)
                 return res
 
-    def _check_permission(self, path, user, method):
+    def _has_permission(self, path, user, method):
         groups = user.groups.all()
         queryset = APIPermissionModel.objects.filter(group__in=groups, method__in=[method, APIPermissionModel.ALL], active=True)
         logger.debug(f'api permission queryset count: {queryset.count()}')
