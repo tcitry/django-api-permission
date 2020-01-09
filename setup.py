@@ -15,7 +15,7 @@ setup(
     packages=find_packages(exclude=["tests*"]),
     include_package_data=True,
     license='MIT License',
-    description='A Django api permission manager that helps you custom api url in regular expression and control access',
+    description='A Django api permission manager that helps you custom api url in regular expression and control access.',
     long_description_content_type="text/markdown",
     long_description=README,
     url='https://github.com/tcitry/django-api-permission',

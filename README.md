@@ -4,7 +4,7 @@
 
 ## 1. Intro
 
-A Django api permission manager that helps you custom api url in regular expression and control access
+A Django api permission manager that helps you custom api url in regular expression and control access.
 
 ## 2. Quick Start
 
