@@ -31,7 +31,7 @@ MIDDLEWARE = [
 ]
 ```
 
-### migrate
+### 2.3 migrate
 
 ```
 ./manage.py migrate api_permission
