@@ -2,19 +2,19 @@
 
 ![](https://img.shields.io/pypi/v/django-api-permission.svg?label=django-api-permission)
 
-## Intro
+## 1. Intro
 
 A Django api permission manager that helps you custom api url in regular expression and control access
 
-## Quick Start
+## 2. Quick Start
 
-### Install
+### 2.1 Install
 
 ```
 pip install django-api-permission
 ```
 
-### add to INSTALLED_APPS and MIDDLEWARE
+### 2.2 add to INSTALLED_APPS and MIDDLEWARE
 
 ```
 INSTALLED_APPS = [
@@ -31,10 +31,16 @@ MIDDLEWARE = [
 ]
 ```
 
-## Demo
+## 3. Demo
+
+### 3.1 list
 
 ![](./demo1.png)
 
+### 3.2 edit
+
 ![](./demo2.png)
+
+### 3.3 result
 
 ![](./demo3.png)
