@@ -3,8 +3,9 @@ from django.http.response import JsonResponse
 from django.utils.deprecation import MiddlewareMixin
 from rest_framework.authtoken.models import Token
 from rest_framework import status
-from .models import APIPermissionModel
 from .exceptions import APIPermissionException
+from .models import APIPermissionModel
+from .settings import API_PREFIX
 import logging
 import re
 
@@ -33,12 +34,13 @@ class APIPermCheckMiddleware(MiddlewareMixin):
 
         logger.debug(f"header_token is:{header_token} user: {user}, method: {method}, path: {path}")
         if not path.startswith('/admin/'):
-            if not self._has_permission(path, user, method):
-                res = JsonResponse({
-                    'code': 1,
-                    'msg': f'permission denied: user: {user}, method: {method}, path: {path}',
-                }, status=status.HTTP_403_FORBIDDEN)
-                return res
+            if path.startswith(API_PREFIX):
+                if not self._has_permission(path, user, method):
+                    res = JsonResponse({
+                        'code': 1,
+                        'msg': f'permission denied: user: {user}, method: {method}, path: {path}',
+                    }, status=status.HTTP_403_FORBIDDEN)
+                    return res
 
     def _has_permission(self, path, user, method):
         groups = user.groups.all()

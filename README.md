@@ -37,6 +37,10 @@ MIDDLEWARE = [
 ./manage.py migrate api_permission
 ```
 
+### 2.4 API_PREFIX
+
+You can custom `API_PREFIX` in settings.py to only check the API starts with API_PREFIX, default is `/api/`.
+
 ## 3. Demo
 
 ### 3.1 list
