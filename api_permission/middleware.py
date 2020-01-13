@@ -5,7 +5,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework import status
 from .exceptions import APIPermissionException
 from .models import APIPermissionModel
-from .settings import API_PREFIX
+from .api_settings import API_PREFIX
 import logging
 import re
 
@@ -26,11 +26,13 @@ class APIPermCheckMiddleware(MiddlewareMixin):
                 token_obj = Token.objects.get(key=token[1])
                 user = token_obj.user
             except Token.DoesNotExist as e:
-                logger.warning(f"api_permission checker: bearer token invalid: {e}")
-                raise APIPermissionException("Bearer Token invalid")
+                msg = f"api_permission checker: bearer token invalid: {e}"
+                logger.warning(msg)
+                return self._return_403_res(msg)
             except Exception as e:
-                logger.warning(f"APIPermissionException : {e}")
-                raise APIPermissionException(e)
+                msg = f"APIPermissionException : {e}"
+                logger.warning(msg)
+                return self._return_403_res(msg)
 
         logger.debug(f"header_token is:{header_token} user: {user}, method: {method}, path: {path}")
         if not path.startswith('/admin/'):
@@ -55,3 +57,11 @@ class APIPermCheckMiddleware(MiddlewareMixin):
             else:
                 logger.info(f"path not match: user: {user} api.pattern:{api.pattern}, path: {path}")
         return False
+
+    def _return_403_res(self, msg):
+        res = {
+            'code': 1,
+            'msg': 'api_permission异常:{}'.format(msg),
+            'data': None
+        }
+        return JsonResponse(res, status=status.HTTP_403_FORBIDDEN)
