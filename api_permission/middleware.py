@@ -35,7 +35,7 @@ class APIPermCheckMiddleware(MiddlewareMixin):
                 return self._return_403_res(msg)
 
         logger.debug(f"header_token is:{header_token} user: {user}, method: {method}, path: {path}")
-        if not path.startswith('/admin/'):
+        if not path.startswith('/admin/') or not user.is_superuser:
             if path.startswith(API_PREFIX):
                 if not self._has_permission(path, user, method):
                     res = JsonResponse({
