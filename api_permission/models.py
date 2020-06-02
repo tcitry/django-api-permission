@@ -7,9 +7,9 @@ class APIPermissionModel(models.Model):
     GET = 'GET'
     ALL = 'ALL'
     METHODS = (
-        (POST, "创建/编辑/删除"),
-        (GET, "查看"),
-        (ALL, "所有"),
+        (POST, "create/edit/delete"),
+        (GET, "readonly"),
+        (ALL, "all"),
     )
 
     pattern = models.CharField("API正则", max_length=128)
