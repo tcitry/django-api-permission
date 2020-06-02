@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import Group
+from django.utils.translation import gettext_lazy as _
 
 
 class APIPermissionModel(models.Model):
@@ -7,22 +8,22 @@ class APIPermissionModel(models.Model):
     GET = 'GET'
     ALL = 'ALL'
     METHODS = (
-        (POST, "create/edit/delete"),
-        (GET, "readonly"),
-        (ALL, "all"),
+        (POST, _("create/edit/delete")),
+        (GET, _("readonly")),
+        (ALL, _("all")),
     )
 
-    pattern = models.CharField("API正则", max_length=128)
-    method = models.CharField("方法类型", max_length=16, choices=METHODS)
-    active = models.BooleanField("是否生效", default=True)
-    group = models.ManyToManyField(Group, db_constraint=True, verbose_name="组/角色",
+    pattern = models.CharField(_("api pattern"), max_length=128)
+    method = models.CharField(_("method"), max_length=16, choices=METHODS)
+    active = models.BooleanField(_("is Active"), default=True)
+    group = models.ManyToManyField(Group, db_constraint=True, verbose_name=_("group"),
                                    related_name='api_permissions')
-    comment = models.CharField("备注", max_length=256, blank=True, null=True)
+    comment = models.CharField(_("comment"), max_length=256, blank=True, null=True)
 
-    created_at = models.DateTimeField("创建时间", auto_now_add=True, null=True)
-    updated_at = models.DateTimeField("更新时间", auto_now=True, null=True)
+    created_at = models.DateTimeField(_("created"), auto_now_add=True, null=True)
+    updated_at = models.DateTimeField(_("updated"), auto_now=True, null=True)
 
     class Meta:
         db_table = 'api_permission'
-        verbose_name = 'API 权限'
-        verbose_name_plural = 'API 权限列表'
+        verbose_name = _('API Permission')
+        verbose_name_plural = _('API Permissions')

@@ -61,7 +61,7 @@ class APIPermCheckMiddleware(MiddlewareMixin):
     def _return_403_res(self, msg):
         res = {
             'code': 1,
-            'msg': 'api_permission异常:{}'.format(msg),
+            'msg': 'api_permission exception:{}'.format(msg),
             'data': None
         }
         return JsonResponse(res, status=status.HTTP_403_FORBIDDEN)
