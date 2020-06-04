@@ -23,10 +23,11 @@ class APIPermCheckMiddleware(MiddlewareMixin):
         if request.user and header_token is not None:
             try:
                 token = header_token.split(' ')
+                assert len(token) == 2, "token maybe invalid"
                 token_obj = Token.objects.get(key=token[1])
                 user = token_obj.user
             except Token.DoesNotExist as e:
-                msg = f"api_permission checker: bearer token invalid: {e}"
+                msg = f"api_permission checker: bearer token not exists: {e}"
                 logger.warning(msg)
                 return self._return_403_res(msg)
             except Exception as e:
