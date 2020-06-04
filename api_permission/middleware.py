@@ -5,7 +5,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework import status
 from .exceptions import APIPermissionException
 from .models import APIPermissionModel
-from .api_settings import API_PREFIX, PERMISSION_DENIED_CODE, API_AUTHORIZATION_HEADER, ADMIN_SITE_PATH
+from .api_settings import API_PREFIX, PERMISSION_DENIED_CODE, AUTHORIZATION_HEADER, ADMIN_SITE_PATH
 import logging
 import re
 
@@ -15,7 +15,7 @@ class APIPermCheckMiddleware(MiddlewareMixin):
     def process_request(self, request):
         path = request.path
         method = request.method
-        header_token = request.META.get(API_AUTHORIZATION_HEADER, None)
+        header_token = request.META.get(AUTHORIZATION_HEADER, None)
         user = request.user or AnonymousUser()
         if request.user and header_token is not None:
             try:
