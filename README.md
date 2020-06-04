@@ -45,12 +45,12 @@ You can custom `API_PREFIX` in settings.py to only check the API starts with API
 
 ### 3.1 list
 
-![](./demo1.png)
+![](./demo/demo1.png)
 
 ### 3.2 edit
 
-![](./demo2.png)
+![](./demo/demo2.png)
 
 ### 3.3 result
 
-![](./demo3.png)
+![](./demo/demo3.png)
