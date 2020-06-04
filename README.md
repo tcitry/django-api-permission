@@ -37,9 +37,20 @@ MIDDLEWARE = [
 ./manage.py migrate api_permission
 ```
 
-### 2.4 API_PREFIX
+### 2.4 settings
 
-You can custom `API_PREFIX` in settings.py to only check the API starts with API_PREFIX, default is `/api/`.
+set `API_PERMISSION_CONF` in your settings.py as a dict.
+
+```
+API_PERMISSION_CONF = {
+    'API_PREFIX': ['api/topic/'], # default is '/'
+    'PERMISSION_DENIED_CODE': 400, # default is 1
+    'API_AUTHORIZATION_HEADER': 'HTTP_AUTHORIZATION', # default is HTTP_AUTHORIZATION
+    'ADMIN_SITE_PATH': '/admin/' default is /admin/
+}
+```
+
+You can custom `API_PREFIX` as a str like `'/'` or list like `['api/account', 'api/topic']`.
 
 ## 3. Demo
 
