@@ -12,7 +12,7 @@ setup(
         "Django",
         "djangorestframework",
     ],
-    packages=find_packages(exclude=["tests*"]),
+    packages=find_packages(exclude=["tests*", "demo*"]),
     include_package_data=True,
     license='MIT License',
     description='A Django api permission manager that helps you custom api url in regular expression and control access.',
