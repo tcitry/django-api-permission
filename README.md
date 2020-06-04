@@ -16,7 +16,7 @@ pip install django-api-permission
 
 ### 2.2 add to INSTALLED_APPS and MIDDLEWARE
 
-```
+```python
 INSTALLED_APPS = [
     ...
     'api_permission',
@@ -41,7 +41,7 @@ MIDDLEWARE = [
 
 set `API_PERMISSION_CONF` in your settings.py as a dict.
 
-```
+```python
 API_PERMISSION_CONF = {
     'API_PREFIX': ['api/topic/'], # default is /
     'PERMISSION_DENIED_CODE': 400, # default is 1
