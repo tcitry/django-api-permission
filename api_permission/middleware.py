@@ -17,14 +17,14 @@ class APIPermCheckMiddleware(MiddlewareMixin):
         method = request.method
         header_token = request.META.get(AUTHORIZATION_HEADER, None)
         user = request.user or AnonymousUser()
-        if request.user and header_token is not None:
+        if header_token:
             try:
                 token = header_token.strip().split(' ')
                 assert len(token) > 0, f"token maybe invalid: {header_token}"
                 token_obj = Token.objects.get(key=token[-1])
                 user = token_obj.user
             except Token.DoesNotExist as e:
-                msg = f"api_permission checker: bearer token not exists: {e}"
+                msg = f"api_permission checker: token not exists: {e}"
                 return self._return_403_res(msg)
             except Exception as e:
                 msg = f"{e}"
@@ -45,8 +45,7 @@ class APIPermCheckMiddleware(MiddlewareMixin):
                     prefix = '/' + str(prefix)
                 api_prefix_list.append(prefix)
 
-
-        if not path.startswith(ADMIN_SITE_PATH) or not user.is_superuser:
+        if not path.startswith(ADMIN_SITE_PATH) and not user.is_superuser:
             for api_prefix in api_prefix_list:
                 if path.startswith(api_prefix):
                     if not self._has_permission(path, user, method):

@@ -43,8 +43,8 @@ set `API_PERMISSION_CONF` in your settings.py as a dict.
 
 ```python
 API_PERMISSION_CONF = {
-    'API_PREFIX': ['api/topic/'], # default is /
-    'PERMISSION_DENIED_CODE': 400, # default is 1
+    'API_PREFIX': ['api/topic/'], # default is /api/
+    'PERMISSION_DENIED_CODE': 1, # default is 1
     'AUTHORIZATION_HEADER': 'HTTP_AUTHORIZATION', # default is HTTP_AUTHORIZATION
     'ADMIN_SITE_PATH': '/admin/' # default is /admin/
 }
