@@ -53,7 +53,7 @@ API_PERMISSION_CONF = {
 
 You can custom `API_PREFIX` as a str like `'/'` or list like `['api/account', 'api/topic']`.
 
-** When you set `TOKEN_EXPIRE`, you need add below in your `REST_FRAMEWORK` settings. **
+**When you set `TOKEN_EXPIRE`, you need add below in your `REST_FRAMEWORK` settings.**
 
 ```python
 REST_FRAMEWORK = {
