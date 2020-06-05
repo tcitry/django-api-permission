@@ -43,14 +43,26 @@ set `API_PERMISSION_CONF` in your settings.py as a dict.
 
 ```python
 API_PERMISSION_CONF = {
-    'API_PREFIX': ['api/topic/'], # default is /api/
+    'API_PREFIX': ['api/topic/'], # default is /
     'PERMISSION_DENIED_CODE': 1, # default is 1
     'AUTHORIZATION_HEADER': 'HTTP_AUTHORIZATION', # default is HTTP_AUTHORIZATION
-    'ADMIN_SITE_PATH': '/admin/' # default is /admin/
+    'ADMIN_SITE_PATH': '/admin/', # default is /admin/
+    'TOKEN_EXPIRE': 15, # unit is days, default is None, which won't check token expire.
 }
 ```
 
 You can custom `API_PREFIX` as a str like `'/'` or list like `['api/account', 'api/topic']`.
+
+** When you set `TOKEN_EXPIRE`, you need add below in your `REST_FRAMEWORK` settings. **
+
+```python
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        ...
+        'api_permission.authentication.ExpireTokenAuthentication',
+    ),
+}
+```
 
 ## 3. Demo
 
